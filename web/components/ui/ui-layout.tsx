@@ -8,16 +8,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { AccountChecker } from '../account/account-ui';
-import {
-  ClusterChecker,
-  ClusterUiSelect,
-  ExplorerLink,
-} from '../cluster/cluster-ui';
+import { ClusterChecker, ExplorerLink } from '../cluster/cluster-ui';
 import toast, { Toaster } from 'react-hot-toast';
 
 const pages: { label: string; path: string }[] = [
   { label: 'Account', path: '/account' },
-  { label: 'Clusters', path: '/clusters' },
+  { label: 'Onboard', path: '/onboard' },
+  // { label: 'Clusters', path: '/clusters' },
 ];
 
 export function UiLayout({ children }: { children: ReactNode }) {
@@ -49,7 +46,7 @@ export function UiLayout({ children }: { children: ReactNode }) {
         </div>
         <div className="flex-none space-x-2">
           <WalletButton />
-          <ClusterUiSelect />
+          {/* <ClusterUiSelect /> */}
         </div>
       </div>
       <ClusterChecker>
