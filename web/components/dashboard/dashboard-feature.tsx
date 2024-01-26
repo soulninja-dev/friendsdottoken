@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 const links: { label: string; href: string }[] = [
   { label: 'get started', href: '/onboard' },
   { label: 'discover friends', href: '/discover' },
-  { label: 'manage your content', href: '/content' },
-  { label: 'manage your audience', href: '/audience' },
+  { label: 'your content', href: '/content' },
+  { label: 'your audience', href: '/audience' },
 ];
 
 export default function DashboardFeature() {
@@ -22,7 +22,6 @@ export default function DashboardFeature() {
       </div>
       <div className="max-w-xl mx-auto py-6 sm:px-6 lg:px-8 text-center">
         <div className="space-y-2">
-          <p>index</p>
           {links.map((link, index) => (
             <div key={link.href} className="link">
               <Link
