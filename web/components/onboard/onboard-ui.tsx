@@ -12,7 +12,7 @@ import { IconRefresh } from '@tabler/icons-react';
 import { AccountTokenBalance } from '../account/account-ui';
 import { ExplorerLink } from '../cluster/cluster-ui';
 import { AppModal, ellipsify } from '../ui/ui-layout';
-import { useCreateMint } from './onboard-data-access';
+import { useCreateMint, useMintToken } from './onboard-data-access';
 
 export function MintList() {
   const { publicKey } = useWallet();
@@ -216,9 +216,9 @@ function ModalCreateMint({
   show: boolean;
   address: web3.PublicKey;
 }) {
-  //   const wallet = useWallet();
-  // todo: change mutation to create mint
   const mutation = useCreateMint({ address });
+
+  const tempMutation = useMintToken({ address });
 
   return (
     <AppModal
@@ -228,14 +228,32 @@ function ModalCreateMint({
       // submitDisabled={!destination || !amount || mutation.isPending}
       submitLabel="Create"
       submit={() => {
-        mutation
+        const mintaddy = mutation
           .mutateAsync({
             amount: 100,
             name: 'GOLD',
             symbol: 'GOLD',
             uri: 'soulninja.eth',
           })
-          .then(() => hide());
+          .then((data) => {
+            hide();
+            return data;
+          });
+
+        console.log('mint sig tbh');
+        mintaddy.then((data) => {
+          if (data) {
+            tempMutation
+              .mutateAsync({
+                amount: 1000,
+                mint: data?.toString(),
+                to: address.toString(),
+              })
+              .then((da) => {
+                if (da) console.log(da?.toString());
+              });
+          }
+        });
       }}
     >
       <p>

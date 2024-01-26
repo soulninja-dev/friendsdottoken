@@ -176,6 +176,22 @@ export function ellipsify(str = '', len = 4) {
   return str;
 }
 
+export function useAddressToast() {
+  return (signature: string) => {
+    toast.success(
+      <div className={'text-center'}>
+        <div className="text-lg">Transaction sent</div>
+        <ExplorerLink
+          path={`address/${signature}`}
+          label={'View Transaction'}
+          className="btn btn-xs btn-primary"
+        />
+      </div>,
+      { duration: 4000 }
+    );
+  };
+}
+
 export function useTransactionToast() {
   return (signature: string) => {
     toast.success(

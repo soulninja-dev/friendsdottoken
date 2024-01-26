@@ -13,7 +13,7 @@ import {
 } from '@solana/web3.js';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { useTransactionToast } from '../ui/ui-layout';
+import { useAddressToast } from '../ui/ui-layout';
 
 export function useGetBalance({ address }: { address: PublicKey }) {
   const { connection } = useConnection();
@@ -69,7 +69,7 @@ export function useGetTokenAccountBalance({ address }: { address: PublicKey }) {
 
 export function useTransferSol({ address }: { address: PublicKey }) {
   const { connection } = useConnection();
-  const transactionToast = useTransactionToast();
+  const transactionToast = useAddressToast();
   const wallet = useWallet();
   const client = useQueryClient();
 
@@ -132,7 +132,7 @@ export function useTransferSol({ address }: { address: PublicKey }) {
 
 export function useRequestAirdrop({ address }: { address: PublicKey }) {
   const { connection } = useConnection();
-  const transactionToast = useTransactionToast();
+  const transactionToast = useAddressToast();
   const client = useQueryClient();
 
   return useMutation({
